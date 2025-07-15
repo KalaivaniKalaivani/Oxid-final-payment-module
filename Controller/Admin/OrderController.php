@@ -281,12 +281,7 @@ class OrderController extends AdminDetailsController
                                     $aInstalmentDetails['instalment' . $dCycle]['status'] = 'NOVALNET_INSTALMENT_STATUS_REFUNDED';
                                 }
                             }
-                            if (!empty($aResponse['transaction']['refund']['tid'])) {
-                                $aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_CANCEL_MESSAGE' => [$aResponse['transaction']['tid'], NovalnetUtil::getFormatDate()]];
-                            } else {
-                                $aNovalnetComments[] .= PHP_EOL;
-                            }
-
+                            $aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_CANCEL_MESSAGE' => [$aResponse['transaction']['tid'], NovalnetUtil::getFormatDate()]];
                             $oxpaid = '0000-00-00 00:00:00';
                             NovalnetUtil::updateTableValues('oxorder', ['OXPAID' => $oxpaid], 'OXORDERNR', $aServerResponse['order_id']);
                             $aAdditionalData['instalment_comments'] = $aInstalmentDetails;
