@@ -281,10 +281,8 @@ class OrderController extends AdminDetailsController
                                     $aInstalmentDetails['instalment' . $dCycle]['status'] = 'NOVALNET_INSTALMENT_STATUS_REFUNDED';
                                 }
                             }
-                            if (!empty($aResponse['transaction']['refund']['amount'])) {
-                                $currency = !empty($aResponse['transaction']['refund']['currency']) ? $aResponse['transaction']['refund']['currency'] : $aResponse['transaction']['currency'];
+                            if (!empty($aResponse['transaction']['refund']['tid'])) {
                                 $aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_CANCEL_MESSAGE' => [$aResponse['transaction']['tid'], NovalnetUtil::getFormatDate()]];
-                                $aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_REFUND_TEXT' => [NovalnetUtil::formatCurrency($aResponse['transaction']['refund']['amount'], $currency) . ' ' . $currency]];
                             } else {
                                 $aNovalnetComments[] .= PHP_EOL;
                             }
