@@ -575,11 +575,7 @@ class WebhookController extends FrontendController
                         $aInstalmentDetails['instalment' . $dcycle]['status'] = 'NOVALNET_INSTALMENT_STATUS_REFUNDED';
                     }
                 }
-                if (!empty($this->eventData['transaction']['refund']['tid'])) {
-                    $this->aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_CANCEL_MESSAGE' => [$this->eventData['transaction']['tid'], NovalnetUtil::getFormatDate()]];
-                } else {
-                    $this->aNovalnetComments[] = PHP_EOL;
-                }
+                $this->aNovalnetComments[] = ['NOVALNET_CALLBACK_INSTALMENT_CANCEL_MESSAGE' => [$this->eventData['transaction']['tid'], NovalnetUtil::getFormatDate()]];
                 $this->aAdditionalData['novalnet_comments'][] = $this->aNovalnetComments;
                 $this->aAdditionalData['instalment_comments'] = $aInstalmentDetails;
                 NovalnetUtil::updateTableValues('oxorder', ['OXPAID' => $oxpaid], 'OXORDERNR', $this->orderID);
